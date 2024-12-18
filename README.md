@@ -33,11 +33,86 @@ int main() {
 unordered_map<string,int>umap;
 umap["shree"]=10;
 umap["ankit"]=20;
-umap["sid"]=30;
+umap["srk"]=30;
 for(auto it:umap)
 cout<<it.first<<" "<<it.second<<endl;
     return 0;
 }
+#include<iostream>
+#include<unordered_map>
+#include<vector>
+using namespace std;
+
+vector<int> intersectionOfArrays(int arr1[], int n1, int arr2[], int n2) {
+    unordered_map<int, int> map;
+    vector<int> intersection;
+    
+    // Step 1: Store frequency of elements from the first array in the hashmap
+    for (int i = 0; i < n1; i++) {
+        map[arr1[i]]++;
+    }
+
+    // Step 2: Traverse the second array and check for intersection
+    for (int i = 0; i < n2; i++) {
+        if (map[arr2[i]] > 0) {  // Check if element exists in the hashmap
+            intersection.push_back(arr2[i]);
+            map[arr2[i]] = 0;  // Mark the element as "used" by setting its count to 0
+        }
+    }
+
+    return intersection;
+}
+
+int main() {
+    int arr1[] = {1, 2, 2, 1, 4};
+    int arr2[] = {2, 2, 4, 5, 1};
+
+    int n1 = sizeof(arr1) / sizeof(arr1[0]);
+    int n2 = sizeof(arr2) / sizeof(arr2[0]);
+
+    vector<int> result = intersectionOfArrays(arr1, n1, arr2, n2);
+
+    cout << "Intersection of arrays: ";
+    for (int num : result) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
+unique elemnents:-
+#include<iostream>
+#include<unordered_set>  // For unordered_set (hashset)
+using namespace std;
+
+int countDistinctElements(int arr[], int n) {
+    unordered_set<int> distinctElements;
+    
+    // Insert each element into the unordered_set
+    for (int i = 0; i < n; i++) {
+        distinctElements.insert(arr[i]);
+    }
+    
+    // The number of distinct elements is the size of the set
+    return distinctElements.size();
+}
+
+int main() {
+    int arr[] = {1, 2, 2, 3, 4, 5, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    int result = countDistinctElements(arr, n);
+    cout << "Number of distinct elements: " << result << endl;
+    
+    return 0;
+}
+
+
+
+
+
 
 
 intersection of array-
@@ -58,6 +133,50 @@ int main() {
 
     return 0;
 }
+
+
+union:-
+#include<iostream>
+#include<unordered_set>  // For unordered_set (hashset)
+#include<vector>         // For vector to store the result
+using namespace std;
+
+vector<int> unionOfArrays(int arr1[], int n1, int arr2[], int n2) {
+    unordered_set<int> unionSet;
+    
+    // Insert elements of arr1 into the set
+    for (int i = 0; i < n1; i++) {
+        unionSet.insert(arr1[i]);
+    }
+
+    // Insert elements of arr2 into the set
+    for (int i = 0; i < n2; i++) {
+        unionSet.insert(arr2[i]);
+    }
+
+    // Convert the unordered_set to a vector for returning the result
+    vector<int> result(unionSet.begin(), unionSet.end());
+    return result;
+}
+
+int main() {
+    int arr1[] = {1, 2, 2, 3, 4};
+    int arr2[] = {3, 4, 5, 6};
+    
+    int n1 = sizeof(arr1) / sizeof(arr1[0]);
+    int n2 = sizeof(arr2) / sizeof(arr2[0]);
+    
+    vector<int> result = unionOfArrays(arr1, n1, arr2, n2);
+    
+    cout << "Union of arrays: ";
+    for (int num : result) {
+        cout << num << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
+
 //reverse array:
 
 
@@ -141,4 +260,30 @@ int main() {
         cout << i << " ";
     return 0;
 }
-
+maxarray:-
+#include<iostream>
+using namespace std;
+int maxarray(int n, int arr[]) {
+    for(int i=0;i<n-1;i++) {
+        if (arr[i]<arr[i+1]) {
+            cout<< "sorted";
+        }
+      else {
+        cout<<"not sorted"; 
+     }  
+   }
+}
+int main() {
+    int arr[]= {1,4,5,7,2,6,4};
+    int n= sizeof(arr)/sizeof(arr[0]);
+    cout<<"size of array"<<n<<endl;
+    maxarray(arr[],n);
+   return 0;
+   
+}
+Purpose
+HashMap: A HashMap is a collection that stores key-value pairs, where each key is associated with exactly one value. It allows for fast retrieval, insertion, and deletion of elements based on the key.
+HashSet: A HashSet is a collection that only stores unique elements. It does not maintain any association between keys and values. It is used to store a set of unique elements without duplicates.
+2. Data Structure
+HashMap: Internally, it stores entries as key-value pairs (<key, value>). The key is unique, but the value can be duplicated.
+HashSet: It only stores the key (or element) itself. The HashSet internally uses a HashMap to store elements (keys), but only the keys are used, and the values are typically ignored.
