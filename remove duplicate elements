@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+void removeduplicate(vector<int>&arr) {
+unordered_set<int> seen;
+int index=0;
+for(int i=0;i<arr.size();i++) {
+    if(seen.find(arr[i])==seen.end()) {
+        seen.insert(arr[i]);
+        arr[index++]=arr[i];
+    }
+}
+arr.resize(index);
+}
+
+int main() {
+    // Write C++ code here
+    vector<int>arr={1,2,3,4,5,5,3,2};
+    removeduplicate(arr);
+    std::cout << "original number";
+    for(int num:arr) {
+        cout<< num<<" ";
+    }
+cout<<endl;
+    return 0;
+}
