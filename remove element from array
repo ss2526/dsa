@@ -1,0 +1,26 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+void removeElement(vector<int>& arr, int target) {
+    int index = 0;  // The index for the next valid element to keep
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] != target) {  // Only keep elements not equal to target
+            arr[index++] = arr[i];  // Move valid elements to the front
+        }
+    }
+    arr.resize(index);  // Resize the vector to remove excess elements
+}
+int main() {
+    // Write C++ code here
+    vector<int>arr={1,2,3,4,5,5,3,2};
+    int target=2;
+    removeElement(arr,target);
+    std::cout << "original number";
+    for(int num:arr) {
+        cout<< num<<" ";
+    }
+cout<<endl;
+    return 0;
+}
