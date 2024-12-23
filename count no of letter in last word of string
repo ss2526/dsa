@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std; 
+int main() {
+ string str="shree ankit";
+ string res="";
+ bool space = false;
+ for(int i=0;i<str.length();i++) {
+     if(str[i]==' ') {
+     space=true;
+     }
+    else if(space==true) {
+        res = "";
+        res=res + str[i];
+        space =false;
+        
+    } 
+    else  {
+        res=res + str[i];
+    }
+ }
+cout<< res.length();
+
+    return 0;
+}
