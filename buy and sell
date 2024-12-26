@@ -1,0 +1,45 @@
+brute force
+#include <iostream>
+#include <vector>
+using namespace std;
+void buyandsell(vector<int>&arr, int& maxprofit) {
+    for(int i=0;i<arr.size();i++) {
+        for(int j=i+1;j<arr.size();j++) {
+            int profit = arr[j]-arr[i];
+            if(profit>maxprofit) {
+                maxprofit=profit;
+            }
+        }
+    }
+}
+int main() {
+
+  int vector<int> arr={1,4,1,8,2};
+   int maxprofit=0;
+   cout<<buyandsell(arr,maxprofit);
+   cout << "Maximum Profit: " << maxprofit << endl; // Output the maximum profit
+    return 0;
+}
+optimal -nhi aya samajh 
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxProfit(vector<int> &arr) {
+    int maxPro = 0;
+    int n = arr.size();
+    int minPrice = INT_MAX;
+
+    for (int i = 0; i < arr.size(); i++) {
+        minPrice = min(minPrice, arr[i]);///
+        maxPro = max(maxPro, arr[i] - minPrice);/////
+    }
+    
+    return maxPro;
+}
+
+int main() {
+    vector<int> arr = {7,1,5,3,6,4};
+    int maxPro = maxProfit(arr);
+    cout << "Max profit is: " << maxPro << endl;
+}
