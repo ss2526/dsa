@@ -1,0 +1,99 @@
+bruteforce
+#include <iostream>
+#include <vector>
+using namespace std;
+vector<int>moveZeros(int n,vector<int>&arr) {
+    vector<int>temp;
+    for(int i=0;i<n;i++) {
+    if(arr[i]!=0) {
+        temp.push_back(arr[i]);
+    }
+}
+ int nz =temp.size();
+ for(int i=0;i<nz;i++) {
+     arr[i]=temp[i];
+ }
+ for(int i=nz;i<n;i++) {
+     arr[i]=0;
+ }
+ return arr;
+}
+int main() {
+   vector<int> arr={1,0,9,5,0,3,9};
+   int n =arr.size();
+   vector<int>ans=moveZeros(n,arr);
+   for(auto it:ans) {
+       cout<<it<<"";
+   }
+    return 0;
+}
+dry run-
+Step-by-Step Dry Run:
+Initialization:
+
+arr = {1, 0, 2, 3, 2, 0, 0, 4, 5, 1}
+n = 10 (size of the array)
+temp is an empty vector: temp = {}
+Copying non-zero elements to temp array: We iterate through the array and copy all non-zero elements into the temp array.
+
+Iteration 1 (i = 0): a[0] = 1 → Since it's non-zero, we add it to temp: temp = {1}
+Iteration 2 (i = 1): a[1] = 0 → It's zero, so we skip it.
+Iteration 3 (i = 2): a[2] = 2 → Since it's non-zero, we add it to temp: temp = {1, 2}
+Iteration 4 (i = 3): a[3] = 3 → Since it's non-zero, we add it to temp: temp = {1, 2, 3}
+Iteration 5 (i = 4): a[4] = 2 → Since it's non-zero, we add it to temp: temp = {1, 2, 3, 2}
+Iteration 6 (i = 5): a[5] = 0 → It's zero, so we skip it.
+Iteration 7 (i = 6): a[6] = 0 → It's zero, so we skip it.
+Iteration 8 (i = 7): a[7] = 4 → Since it's non-zero, we add it to temp: temp = {1, 2, 3, 2, 4}
+Iteration 9 (i = 8): a[8] = 5 → Since it's non-zero, we add it to temp: temp = {1, 2, 3, 2, 4, 5}
+Iteration 10 (i = 9): a[9] = 1 → Since it's non-zero, we add it to temp: temp = {1, 2, 3, 2, 4, 5, 1}
+After this step:
+
+temp = {1, 2, 3, 2, 4, 5, 1}
+The non-zero elements are stored in temp.
+Copying the non-zero elements back to the original array arr: Now, we copy the non-zero elements back into the original array a starting from the first index.
+
+Iteration 1 (i = 0): a[0] = temp[0] = 1
+Iteration 2 (i = 1): a[1] = temp[1] = 2
+Iteration 3 (i = 2): a[2] = temp[2] = 3
+Iteration 4 (i = 3): a[3] = temp[3] = 2
+Iteration 5 (i = 4): a[4] = temp[4] = 4
+Iteration 6 (i = 5): a[5] = temp[5] = 5
+Iteration 7 (i = 6): a[6] = temp[6] = 1
+After this step:
+
+a = {1, 2, 3, 2, 4, 5, 1, _, _, _}
+At this point, the non-zero elements have been copied back to the original array.
+
+Filling the remaining positions with zeros: Now, we fill the remaining positions in the original array with zeros.
+
+Iteration 1 (i = 7): a[7] = 0
+Iteration 2 (i = 8): a[8] = 0
+Iteration 3 (i = 9): a[9] = 0
+After this step:
+
+a = {1, 2, 3, 2, 4, 5, 1, 0, 0, 0}
+
+optimal solution using 2 pointer-
+#include <iostream>
+#include <vector>
+using namespace std;
+vector<int>moveZeros(int n,vector<int>&arr) {
+    int i=0;
+    for(int j=0;j<n;j++) {
+    if(arr[j]!=0) {
+        swap(arr[i],arr[j]);
+        i++;
+       }
+    }
+    return arr;
+}
+int main() {
+   vector<int> arr={1,0,9,5,0,3,9};
+   int n =arr.size();
+   vector<int>ans=moveZeros(n,arr);
+   for(auto it:ans) {
+       cout<<it<<"";
+       cout<<endl;
+   }
+    return 0; 
+}
