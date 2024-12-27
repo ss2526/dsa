@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int maxdigit(vector<int>& arr) {
+    int n = arr.size();
+    unordered_map<int, int> freqMap;
+    
+    // Count the frequency of each element in the array
+    for (int i = 0; i < n; i++) {
+        freqMap[arr[i]]++;
+    }
+
+    // Find the element that appears more than n/2 times
+    for (auto& pair : freqMap) {
+        if (pair.second > n / 2) {
+            return pair.first;  // Return the element that appears more than n/2 times
+        }
+    }
+
+    return -1;  // If no element appears more than n/2 times, return -1
+}
+
+int main() {
+    vector<int> arr = {3, 3, 4, 2, 4, 4, 2, 4, 4}; // Example array
+    cout << "Maximum digit more than n/2 times is: " << maxdigit(arr) << endl;
+
+    return 0;
+}
+why cannot use just simple function and count why did we use hashmaps only 
