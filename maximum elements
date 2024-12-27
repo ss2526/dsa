@@ -29,3 +29,13 @@ int main() {
     return 0;
 }
 why cannot use just simple function and count why did we use hashmaps only 
+Why do we write pair.first and pair.second?
+Key-Value Structure:
+
+In a map, each element is a pair consisting of two parts: a key and a value. The key is used to access or look up the value in the map.
+The std::pair is the class used to store these two values. The first element of the pair is the key, and the second element is the value.
+first and second:
+
+first and second are members of the std::pair class.
+first holds the key.
+second holds the value.
