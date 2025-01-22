@@ -1,0 +1,99 @@
+class Solution {
+    public String intToRoman(int num) {
+        int[] n = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] s = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int i =0;
+        String str = new String(); 
+        while (num>0){
+            if (num>=n[i]){
+                str=str+s[i];
+                num-=n[i];
+            } else{
+                i++;
+            }
+        }
+        return str;
+    }
+}
+
+Arrays n and s:
+
+n[] contains the integer values corresponding to Roman numerals.
+These are ordered from largest to smallest values (1000, 900, 500, 400, 100, etc.).
+s[] contains the Roman numeral symbols corresponding to the values in n[].
+For example, 1000 corresponds to "M", 900 corresponds to "CM", etc.
+Greedy Approach:
+
+The algorithm starts with the largest Roman numeral and checks if it can be subtracted from num. If it can, the corresponding Roman numeral is added to the result (str), and num is reduced by that value.
+This continues until num becomes zero, using the largest possible Roman numeral at each step.
+While loop:
+
+The while loop runs as long as num > 0. It checks each value in the array n[] and tries to subtract it from num.
+If num is greater than or equal to the current value in n[i], it appends the corresponding Roman numeral (s[i]) to the result string and subtracts the value from num.
+If num is smaller than n[i], the algorithm moves to the next smaller value (using i++).
+Result Construction:
+
+The result is stored in the string str. Each time a Roman numeral is appended, the string grows, and the integer num decreases accordingly.
+Example Walkthrough:
+Let’s say we want to convert num = 3549 to a Roman numeral:
+
+Initialize:
+
+n = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+s = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+num = 3549, str = "", and i = 0.
+First iteration (i = 0):
+
+num = 3549 is greater than n[0] = 1000.
+Add "M" to str, so str = "M".
+Subtract 1000 from num, so num = 2549.
+Second iteration (i = 0):
+
+num = 2549 is greater than n[0] = 1000.
+Add "M" to str, so str = "MM".
+Subtract 1000 from num, so num = 1549.
+Third iteration (i = 0):
+
+num = 1549 is greater than n[0] = 1000.
+Add "M" to str, so str = "MMM".
+Subtract 1000 from num, so num = 549.
+Next iterations:
+
+num = 549, str = "MMM".
+Move to the next values:
+num = 549 is greater than n[2] = 500, so add "D" to str, str = "MMMD".
+Subtract 500 from num, so num = 49.
+Next iterations:
+
+num = 49, str = "MMMD".
+num = 49 is greater than n[8] = 40, so add "XL" to str, str = "MMMDXL".
+Subtract 40 from num, so num = 9.
+Next iterations:
+
+num = 9, str = "MMMDXL".
+num = 9 is greater than n[9] = 9, so add "IX" to str, str = "MMMDXLIX".
+Subtract 9 from num, so num = 0.
+Result:
+
+Now that num = 0, the loop ends.
+The final result is "MMMDXLIX", which is the Roman numeral representation of 3549.
+
+//Approach 1 : 
+//time complexity - O(1) since the algorithm always iterates through a constant number of values (13 in this case).
+//O(1) since the amount of extra space used is constant (the size of the storeIntRoman vector, which is also 13 in this case
+class Solution {
+public:
+    string intToRoman(int num) {
+        string Roman = "";
+        // Creating vector of pairs to store the Roman numeral values and their corresponding symbols
+        vector<pair<int, string>> storeIntRoman = {{1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"}, {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"}, {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}};
+        // Iterating through the vector and repeatedly adds the corresponding symbols to the result string while subtracting the corresponding value from the input integer until the input integer becomes zero.
+        for (int i = 0; i < storeIntRoman.size(); i++) {
+            while (num >= storeIntRoman[i].first) {
+                Roman += storeIntRoman[i].second;
+                num -= storeIntRoman[i].first;
+            }
+        }
+        return Roman;
+    }
+};
