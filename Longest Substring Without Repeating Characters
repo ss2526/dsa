@@ -1,0 +1,72 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.length();
+        int maxLength = 0;
+        unordered_set<char> charSet;
+        int left = 0;
+        
+        for (int right = 0; right < n; right++) {
+            if (charSet.count(s[right]) == 0) {
+                charSet.insert(s[right]);
+                maxLength = max(maxLength, right - left + 1);
+            } else {
+                while (charSet.count(s[right])) {
+                    charSet.erase(s[left]);
+                    left++;
+                }
+                charSet.insert(s[right]);
+            }
+        }
+        
+        return maxLength;
+    }
+};
+ChatGPT said:
+ChatGPT
+The given C++ code solves the problem of finding the length of the longest substring without repeating characters in a given string s.
+
+Explanation:
+Initialization:
+
+n: The length of the string s.
+maxLength: This will store the length of the longest substring found so far. Initially set to 0.
+charSet: An unordered set that will store the characters of the current substring. We use this to efficiently check if a character has already appeared.
+left: This pointer keeps track of the left boundary of the current window (substring). Initially set to 0.
+Sliding Window Technique:
+
+The outer for loop iterates over the string with the variable right serving as the right boundary of the current window.
+For each character at s[right], the algorithm checks if it's already in the charSet.
+If the character is not in the set:
+
+Insert the character into the set and update maxLength if the length of the current window (which is right - left + 1) is greater than the current maxLength.
+If the character is already in the set:
+
+In this case, we enter a while loop to shrink the window from the left side. We continue removing characters from the set and move the left pointer to the right until the character s[right] is no longer in the set.
+Once the duplicate character is removed, we insert the character at s[right] and continue.
+Return the result:
+
+The final value of maxLength is the length of the longest substring without repeating characters.
+Example Walkthrough:
+Let’s walk through the example "abcabcbb":
+
+First iteration (right = 0, s[right] = 'a'):
+
+'a' is not in the set. Add it, update maxLength = 1.
+Second iteration (right = 1, s[right] = 'b'):
+
+'b' is not in the set. Add it, update maxLength = 2.
+Third iteration (right = 2, s[right] = 'c'):
+
+'c' is not in the set. Add it, update maxLength = 3.
+Fourth iteration (right = 3, s[right] = 'a'):
+
+'a' is in the set. Move left to the right by removing 'a' from the set and incrementing left. Now left = 1.
+Continue removing characters ('b' from the set, left = 2), until we can insert 'a' at right = 3. Now charSet = {'a', 'b', 'c'}.
+Subsequent iterations:
+
+Repeat the same process for other characters in the string.
+The algorithm runs in O(n) time, where n is the length of the string, because both the left and right pointers traverse the string only once, and set operations (insertions and deletions) are O(1) on average.
+
+Final Output:
+For the string "abcabcbb", the output will be 3, since the longest substring without repeating characters is "abc"
