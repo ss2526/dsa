@@ -1,0 +1,33 @@
+Start with the base case n = 1, which is "1".
+For each subsequent n, generate the sequence by:
+Iterating through the current string.
+Counting the consecutive occurrences of each character.
+Constructing the next sequence as "count followed by character".
+Use a loop to generate the sequence up to n iteratively, updating the current string after each iteration.
+Optimize the string manipulation using a reserved buffer to reduce reallocations.
+#include <string>
+class Solution {
+public:
+    string countAndSay(int n) {
+
+        string ans = "1";
+        for(int i=2;i<=n;i++){
+            string charr = "";
+            int count = 1;
+
+            for(int j=1;j<ans.size();j++){
+                if(ans[j] == ans[j-1]){
+                    count += 1;
+                }
+                else{
+                    charr += to_string(count) + ans[j-1]; 
+                    count = 1;
+                }
+            }
+            charr += to_string(count) + ans.back(); 
+            ans = charr;
+        }
+        return ans;
+
+    }
+};
